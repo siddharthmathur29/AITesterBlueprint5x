@@ -1,0 +1,109 @@
+Test Plan — VWO Login Dashboard
+
+Author: Test Plan Creator Skill
+Date: 2026-10-19
+Version: 1.0
+
+Executive Summary
+The VWO Login Dashboard is the primary authentication gateway for app.vwo.com. This test plan verifies
+functional correctness, security, performance, accessibility and integrations (SSO, analytics) required by
+the PRD. The goal is to ensure a secure, low-friction login flow with enterprise-grade protections and
+excellent UX across devices.
+
+Objective
+Ensure a secure, accessible, and high-performance login experience for the VWO platform (app.vwo.com)
+that minimizes user friction while meeting enterprise security and compliance requirements.
+
+Scope
+- Functional: email/password authentication, remember-me, 2FA, SSO, password reset.
+- UX: responsive design, accessibility (WCAG 2.1 AA), loading states, password strength feedback.
+- Security: encryption in transit, secure storage, rate limiting, session management.
+- Performance: page load < 2s, high availability, scale for thousands of concurrent attempts.
+- Integrations: Analytics, SSO (SAML/OAuth), customer support hooks.
+
+Functional Requirements (Test Areas)
+- Login: valid credentials, invalid credentials, account locked, error messages.
+- Session: session timeout, remember-me persistence, logout behavior.
+- Password flows: forgot-password token generation, reset, recovery paths.
+- Multi-factor: enable/disable 2FA, challenge and recovery.
+- SSO: SAML/OAuth login flow, SSO error handling.
+- Social login (optional): Google and Microsoft flows.
+
+Non-Functional Requirements
+- Security: HTTPS enforced, hashed password storage, brute-force protection.
+- Performance: sub-2s load, asset optimization, CDN integration.
+- Accessibility: ARIA labels, keyboard navigation, high-contrast support.
+- Scalability & Reliability: 99.9% uptime, multi-region support.
+
+Test Environments
+- QA: Browser matrix (Chrome, Firefox, Edge, Safari), mobile emulation and real devices.
+- Staging/Pre-Prod: SSO-enabled environment with representative traffic.
+- Data: test accounts, recovery email targets, SSO test tenants.
+
+Test Strategy
+1. Design test cases using equivalence classes, boundary values, decision tables, and state transitions.
+2. Perform smoke tests on each build; only proceed if smoke passes.
+3. Execute functional, security, accessibility, performance, and integration tests.
+4. Automate regression-critical API/contract tests (where applicable).
+5. Run exploratory sessions and accessibility audits.
+
+Representative Test Cases
+TC-01: Successful login with valid credentials.
+  - Precondition: test account exists and is active.
+  - Steps: open login, enter credentials, submit.
+  - Expected: 200 OK, redirect to dashboard, no sensitive details in response.
+
+TC-02: Unsuccessful login with incorrect password.
+  - Expected: 401 or generic auth error, no password or stack traces leaked.
+
+TC-03: Forgot password flow.
+  - Steps: request reset, receive token email, follow link, set new password.
+  - Expected: token expiry enforced, password policy validated.
+
+TC-04: Multi-Factor Authentication scenarios.
+  - Verify enabling/disabling 2FA, success and failure paths, recovery codes.
+
+TC-05: SSO flows.
+  - Validate SAML/OAuth flows, expired assertions, single logout and error handling.
+
+TC-06: Accessibility checks.
+  - Verify ARIA labels, keyboard navigation, focus order, color contrast (WCAG 2.1 AA).
+
+TC-07: Performance / Load test.
+  - Target: page load < 2s; run concurrency test at representative scale and track success rates and latency.
+
+Defect Reporting
+- Tool: JIRA
+- Required: steps to reproduce, environment, screenshots/logs, request payloads (if API), severity and priority.
+
+Traceability Matrix (high level)
+Requirement ID | Requirement Summary | Test Case IDs
+FR-Auth-01 | Email/password login | TC-01, TC-02
+FR-Auth-02 | Forgot password | TC-03
+FR-Auth-03 | 2FA | TC-04
+NFR-Perf-01 | Page load < 2s | TC-07
+
+Responsibilities
+- Product Owner: defines acceptance criteria and approves test plan.
+- Test Lead: creates test suites, assigns testers, approves test closure.
+- Testers: execute tests, log defects.
+- DevOps: provide environments and support load tests.
+
+Schedule (example)
+Phase 1: Core auth + password flows + smoke — 2 weeks
+Phase 2: UX/accessibility + integration + performance — 2 weeks
+Phase 3: Regression, stabilization, closure — 1 week
+
+Sign-off
+Product Owner: ____________________  Date: ____________
+Test Lead: ________________________  Date: ____________
+
+Files (binary formats stored in this folder)
+- testplan_vwo_login.pdf (binary PDF)
+- testplan_vwo_login.docx (binary DOCX)
+- testplan_vwo_login.md (source markdown)
+
+How to view
+- Open the markdown in the editor: testplan_vwo_login.md
+- Open the HTML in a browser: testplan_vwo_login.html
+- Open the PDF with Preview (macOS): `open testplan_vwo_login.pdf`
