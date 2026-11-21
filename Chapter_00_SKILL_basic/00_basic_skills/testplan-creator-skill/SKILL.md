@@ -1,10 +1,7 @@
 ---
-name: "Test Plan Creator"
-description: "Based on my template which I will give it will create a test plan for the given project"
-version: "1.0.0"
-author: "siddharth"
-license: "MIT"
-
+name: testplan-creator-skill
+description: "Create a software test plan from a user-provided template and project details. Use when asked to create or update a test plan for a project."
+---
 
 #Test Plan Creator
 your task is to create a test plan for the given project based on the template provided. 
@@ -483,4 +480,3 @@ Output:
 
 Secruity and Saftey
 Make sure that the output is secure and does nnot share any personal information or sensitive data
-

@@ -1,0 +1,21 @@
+{
+  "name": "jira-test-plan-agent",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-template": "node scripts/sync-template.mjs",
+    "dev": "node src/backend/server.mjs",
+    "build": "node scripts/sync-template.mjs && vite build --config vite.config.mjs",
+    "start": "NODE_ENV=production node src/backend/server.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.1.0"
+  }
+}
